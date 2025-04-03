@@ -86,3 +86,34 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("Error:", error));
     });
 });
+let userRole = '';
+
+function setRole(role) {
+    userRole = role;
+    navigateTo('login');
+}
+
+function handleLogin(event) {
+    event.preventDefault();
+
+    // Capture the login details
+    const email = document.getElementById('login-email').value;
+    const name = document.getElementById('login-name').value;
+
+    // Save details for use in the profile page
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userName', name);
+
+    navigateTo('home');
+}
+
+function navigateTo(pageId) {
+    document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+    document.getElementById(pageId).classList.remove('hidden');
+
+    // Display login data in the profile page
+    if (pageId === 'profile') {
+        document.getElementById('profile-name').textContent = localStorage.getItem('userName');
+        document.getElementById('profile-email').textContent = localStorage.getItem('userEmail');
+    }
+}
