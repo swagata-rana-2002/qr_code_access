@@ -1,21 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator</title>
+    <title>Dynamic Profile</title>
+    <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
+
 <body>
-<h2>QR Code Generator</h2>
-<input type="text" id="qrText" placeholder="Enter text for QR">
-<button id="generateQR">Generate QR</button>
-<br><br>
-<img id="qrImage" style="display:none;" alt="Generated QR Code">
-<p id="statusText">QR Code Status: -</p>
-<button id="blockQR">Block QR</button>
-<button id="unblockQR">Unblock QR</button>
+<div class="container">
+    <!-- Choose Role Page -->
+    <div id="choose-role" class="page">
+        <h1>Choose Your Role</h1>
+        <button onclick="setRole('Admin')">Admin</button>
+        <button onclick="setRole('User')">User</button>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login" class="page hidden">
+        <h1>Login</h1>
+        <form onsubmit="handleLogin(event)">
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="text" id="login-name" placeholder="Name" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Home Page -->
+    <div id="home" class="page hidden">
+        <header>
+            <h1>Welcome Home</h1>
+            <img src="profile-icon.png" alt="Profile Icon" class="profile-icon" onclick="navigateTo('profile')">
+        </header>
+        <div class="button-group">
+            <button onclick="navigateTo('card-details')">Add Card Details</button>
+            <h2>QR Code Generator</h2>
+            <input type="text" id="qrText" placeholder="Enter text for QR">
+            <button id="generateQR">Generate QR</button>
+            <br><br>
+            <img id="qrImage" style="display:none;" alt="Generated QR Code">
+            <p id="statusText">QR Code Status: -</p>
+            <button id="blockQR">Block QR</button>
+            <button id="unblockQR">Unblock QR</button>
+        </div>
+    </div>
+
+    <!-- Card Details Page -->
+    <div id="card-details" class="page hidden">
+        <h1>Card Details</h1>
+        <form>
+            <input type="text" placeholder="Registration Number" required>
+            <input type="text" placeholder="Cardholder Name" required>
+            <button type="submit">Submit</button>
+        </form>
+        <button onclick="navigateTo('home')">Back to Home</button>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profile" class="page hidden">
+        <h1>Your Profile</h1>
+        <img src="profile-picture-placeholder.png" alt="Profile Picture" class="profile-picture">
+        <p><strong>Name:</strong> <span id="profile-name"></span></p>
+        <p><strong>Email:</strong> <span id="profile-email"></span></p>
+        <button onclick="navigateTo('home')">Back to Home</button>
+    </div>
+</div>
+
 </body>
+
 </html>
-
-
